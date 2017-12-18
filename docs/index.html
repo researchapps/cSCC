@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <meta name="robots" content="noindex, nofollow">
+      <meta name="googlebot" content="noindex, nofollow">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel='stylesheet' type="text/css" href='css/bootstrap.min.css'>
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+      <title>Stanford Squamous Cell Skin Cancer (cSCC) Recurrence</title>
+
+      <!--  Stanford Squamous Cell Skin Cancer (cSCC) Recurrence Web Prediction Tool.>
+            Copyright (C) 2017  Vanessa Sochat-->
+
+   </head>
+
+
+   <div class="container" style="padding-top:100px">
+
+      <div class="row">
+         <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked red">
+                <li class="active"><a data-toggle="pill" href="#pill-calculate">History</a></li>
+                <li><a data-toggle="pill" href="#pill-about">About</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            <div class="tab-content">
+                <div id="pill-calculate" class="tab-pane fade in active">
+
+      <div class="row">
+         <div class="col-md-12">
+
+            <form class="form-horizontal">
+               <fieldset>
+                  <!-- Form Name -->
+                  <legend>History</legend>
+
+                  <!-- Past Rx of Invasive: Prepended checkbox -->
+                  <div class="form-group" id="past_rx_invasive_div">
+                     <label class="col-md-4 control-label" for="past_rx_invasive">Patient History</label>
+                     <div class="col-md-8">
+                        <div class="input-group">
+                           <span class="input-group-addon">     
+                               <input id="past_rx_invasive" 
+                                      type="checkbox"
+                                      name="past_rx_invasive" checked>  
+                           </span>
+                           <p class="form-control">Past Diagnosis</p>
+                        </div>
+                        <p class="help-block">I have been diagnosed in the past with an invasive squamous cell skin cancer</p>
+                     </div>
+                  </div>
+
+                  <!-- Past Rx Insitu: Appended checkbox -->
+                  <div class="form-group" id="past_rx_insitu_div" style='display:none'>
+                     <label class="col-md-4 control-label" for="past_rx_insitu">Related Diagnosis</label>
+                     <div class="col-md-8">
+                        <div class="input-group">
+                           <span class="input-group-addon">
+                           <input id="past_rx_insitu" 
+                                  name="past_rx_insitu" 
+                                  type="checkbox" 
+                                  placeholder="in-situ squamous cell carcinoma">
+                           </span>
+                        <p class="form-control">in-situ squamous cell carcinoma</p>
+                        </div>
+                        <p class="help-block">I have been diagnosed in the past with a non-invasive (also called in-situ) squamous cell skin cancer</p>
+                     </div>
+                  </div>
+
+                  <!-- Past Rx Keratosis: Appended checkbox -->
+                  <div class="form-group" id="past_rx_keratosis_div" style='display:none'>
+                     <label class="col-md-4 control-label" for="past_rx_keratosis"></label>
+                     <div class="col-md-8">
+                        <div class="input-group">
+                           <span class="input-group-addon">     
+                           <input id="past_rx_keratosis" 
+                                  name="past_rx_keratosis" 
+                                  type="checkbox">
+                           </span>
+                            <p class="form-control">actinic keratosis</p>
+                        </div>
+                        <p class="help-block">I have been diagnosed in the past with an actinic keratosis</p>
+                     </div>
+                  </div>
+
+                  <hr>
+
+                  <!-- Prepended checkbox -->
+                  <div class="form-group" id='genotyped_div'>
+                     <label class="col-md-4 control-label" for="genotyped">Genetic Risk</label>
+                     <div class="col-md-8">
+                        <div class="input-group">
+                           <span class="input-group-addon">     
+                           <input id="genotyped" 
+                                  name="genotyped" 
+                                  type="checkbox">
+                            </span>
+                           <p class="form-control">Known Variants</p>
+                        </div>
+                        <p class="help-block">I have been typed for the 16 genetic variants associated with increased risk of squamous cell skin cancer</p>
+                     </div>
+                  </div>
+
+                  <!-- Risk Alleles: Select Basic -->
+                  <div class="form-group" id="risk_alleles_div" style="display:none">
+                     <label class="col-md-4 control-label" for="risk_alleles">The number of risk alleles that I carry is</label>
+                     <div class="col-md-4">
+                        <select id="risk_alleles" name="risk_alleles" class="form-control">
+                           <option value="0">less than 8</option>
+                           <option value="1">8 or 9</option>
+                           <option value="2">10 or more</option>
+                        </select>
+                     </div>
+                  </div>
+
+                  <!-- Genomic Risk: Select Basic -->
+                  <div class="form-group" id="genomic_risk_div">
+                     <label class="col-md-4 control-label" for="genomic_risk">Family History</label>
+                     <div class="col-md-8">
+                        <p class="help-block">Based on the squamous cell skin cancer histories of my parents, siblings and children, my genetic risk for this cancer is</p>
+                        <select id="genomic_risk" name="genomic_risk" class="form-control">
+                           <option value="0">Low</option>
+                           <option value="1">Moderate</option>
+                           <option value="2">High</option>
+                        </select>
+                     </div>
+                  </div>
+
+                  <hr>
+
+                  <!-- Age in Years: Appended Input-->
+                  <div class="form-group" id="age_years_div">
+                     <label class="col-md-4 control-label" for="age_years">My current age is</label>
+                     <div class="col-md-4">
+                        <div class="input-group">
+                           <input id="age_years" 
+                                  name="age_years"
+                                  class="form-control"
+                                  placeholder="65"
+                                  type="text" required="">
+                           <span class="input-group-addon">years</span>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Gender: Multiple Radios -->
+                  <div class="form-group" id="gender_div">
+                     <label class="col-md-4 control-label" for="gender">My gender is</label>
+                     <div class="col-md-4">
+                        <div class="radio">
+                           <label for="gender-0">
+                           <input type="radio" name="gender" id="gender-0" value="male" checked="checked">
+                           Male
+                           </label>
+                        </div>
+                        <div class="radio">
+                           <label for="gender-1">
+                           <input type="radio" name="gender" id="gender-1" value="female">
+                           Female
+                           </label>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Tendency Sunburn: Select Basic -->
+                  <div class="form-group" id="tendency_sunburn_div">
+                     <label class="col-md-4 control-label" for="tendency_sunburn">My tendency to sunburn is</label>
+                     <div class="col-md-4">
+                        <select id="tendency_sunburn" name="tendency_sunburn" class="form-control">
+                           <option value="0">Low</option>
+                           <option value="1">Moderate</option>
+                           <option value="2">High</option>
+                        </select>
+                     </div>
+                  </div>
+
+                  <!-- Calculate Button -->
+                  <div class="form-group">
+                     <label class="col-md-4 control-label" for="submit"></label>
+                     <div class="col-md-4">
+                        <button id="submit" name="submit" class="btn btn-success">Calculate</button>
+                     </div>
+                  </div>
+
+                  <!-- Rx message -->
+                  <div class="form-group">
+                     <label class="col-md-4 control-label" for="submit"></label>
+                      <div class="col-md-8" style="display:none" id="message">
+                          <p class="alert alert-info"> 
+                          Your chance of developing a new squamous cell skin cancer in the next 3 years is
+                          <span style="font-weight:600" id="rx"></span></p>
+                      </div>
+                  </div>
+               </fieldset>
+            </form>
+         </div>
+      </div>
+                </div>
+                <div id="pill-about" class="tab-pane fade in">
+
+                   <legend>What is this for?</legend>
+                   <p class="well">
+                       This is a diagnosis tool intended to be used with a doctor.
+                   </p>
+
+                   <legend>Who is involved?</legend>
+                   <p class="well">
+                      The algorithm is developed by []. The web interface and associated code is maintained <a href="https://www.github.com/researchapps/cSCC">on Github</a> and you should <a href="https://www.github.com/researchapps/cSCC/issues">open an issue</a> if you have any questions.
+                   </p>
+
+                   <div style="padding-top:50px">
+                       <a href="https://srcc.stanford.edu" target="_blank">
+                           <img src="img/srcc.png" style="border-radius:5px; width:200px">
+                       </a>
+                   </div>
+
+                   </p>
+                </div>
+            </div>
+
+       </div>
+   </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-2.2.2.js"></script>
+<script src='js/tether.min.js'></script>
+<script src='js/lodash.min.js'></script>
+<script src='js/bootstrap.min.js'></script>
+<script type='text/javascript'>
+   $(document).ready(function(){
+      
+      // If past rx invasive selected, other questions not relevant
+      $("#past_rx_invasive").change(function(){
+     
+          if ($(this).is(":checked")) {
+              $("#past_rx_keratosis_div").hide();
+              $("#past_rx_insitu_div").hide();
+          } else {
+              $("#past_rx_keratosis_div").show();
+              $("#past_rx_insitu_div").show(); 
+          }
+
+      })
+
+      // If the patient hasn't been genotyped, ask for family history            
+      $("#genotyped").change(function(){
+      
+          if ($(this).is(":checked")) {
+              $("#risk_alleles_div").show();
+              $("#genomic_risk_div").hide();
+          } else {
+              $("#risk_alleles_div").hide();
+              $("#genomic_risk_div").show();
+          }
+      })
+      
+      // Main calculation goes here
+      $("form").submit(function(e){
+
+          e.preventDefault();
+
+          var gender = $('input[name=gender]:checked').val();
+          var age_years = parseInt($('input[name=age_years]').val());
+          var sunburn_tendency = parseInt($('#tendency_sunburn').val());
+          var past_rx_invasive = + $('input[name=past_rx_invasive]').is(':checked');
+          var past_rx_insitu = + $('input[name=past_rx_insitu]').is(':checked');
+          var past_rx_keratosis = + $('input[name=past_rx_keratosis]').is(':checked');
+          var genomic_risk = parseInt($('#genomic_risk').find(":selected").val());
+
+          // Step 1: define variables based on gender.
+          if (gender == "female"){
+
+              // Female
+              var B = [0.67, 0.08, 0.27, 0.16, 0.54, 1.74, 0.98, 1.51],
+                  alpha0 = -10.50
+                  alpha1 = 0.17
+                  phi = 3.42;
+
+          } else {
+
+              // Male
+              var B = [0.62, 0.09, 0.13, 0.30, 0.66, 1.80, 1.02, 1.37],
+                  alpha0 = -9.89,
+                  alpha1 = 0.17,
+                  phi = 2.60;
+
+          }
+
+          console.log('Betas are ' + B);
+          console.log('alpha0 ' + alpha0);
+          console.log('alpha1 ' + alpha1);
+          console.log('phi ' + phi);
+
+          // Step 2: parse input for covariates
+          var z1 = age_years/10.0;
+          var z2 = + (sunburn_tendency==1); // moderate, + converts bool to int
+          var z3 = + (sunburn_tendency==2); // high,
+          var z4 = past_rx_invasive;        // 1 indicates past diagnosis of invasive carcinoma
+          var z5 = past_rx_insitu           // 1 indicates past diagnosis of non invasive (in-situ)
+          var z6 = past_rx_keratosis        // 1 indicates past diagnosis of actinic keratosis
+          var z7 = + (genomic_risk==1)      // moderate genetic risk 
+          var z8 = + (genomic_risk==2)     // high genetic risk (either by way of alleles or report)
+
+          var Z = [z1, z2, z3, z4, z5, z6, z7, z8]
+          console.log('Z is ' + Z);
+
+          // The output is the probability P of developing a squamous cell cancer in the next three years. P is given by
+          var summation = 0
+          $.each(new Array(8),function(i){ 
+             summation+=(B[i]*Z[i]);
+            }
+          );
+
+          console.log("Dot product of Z and B is " + summation);
+
+          // Calculate assigned probability P of developing a new cancer in the next three years. 
+
+          var inner = 1 + ((phi/alpha1) * Math.exp(alpha0+3*alpha1+summation))
+          console.log("Inner right (before exponent) of equation is " + inner);
+
+          var exponent = -1*(1/phi)
+          var P = ((1 - (inner**exponent)) * 100).toFixed(2);
+
+          // 2.2 Final Output to user:
+          $("#rx").text(P + "%")
+          $('#message').show();
+
+      })
+
+
+})          
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+.red .active a,
+.red .active a:hover {
+    background-color: #b40012 !important;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    color: white !important;
+    background-color: #b40012;
+}
+.nav-pills a {
+   color: #b40012 !important;
+}
+
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+    background-color: #b40012 !important;
+    color: white !important;
+}
+
+.container {
+  padding:20px;
+}
+
+.well {
+  background-color: white !important;
+  padding: 30px;
+}
