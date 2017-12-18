@@ -7,6 +7,6 @@ This is the Stanford Squamous Cell Skin Cancer (cSCC) Recurrence Web Prediction 
  - [LICENSE](LICENSE)
 
 
-![docs/img/srcc.png](docs/img/srcc.png)
+![docs/img/logo.png](docs/img/logo.png)
 
 This tool is developed by [@vsoch](https://www.github.com/vsoch) from the [Stanford University Research Computer Center](https://srcc.stanford.edu).
