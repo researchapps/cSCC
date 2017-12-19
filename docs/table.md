@@ -2,7 +2,7 @@
 Single nucleotide polymorphisms (SNPs)(`a`) in the genetic risk score.
 
 |Region| SNP| Nearest Genes(s) | Reference(s) |
-----------------------------------------------
+|------|----|------------------|--------------|
 |2p22.3 |rs192481803|AC012593.1|Chahal et al 2016|
 |3p13|rs62246017|FOXP1|Asgari et al 2016|
 |3q28|rs6791479|TPRG1/TP63(`b`)|Asgari et al 2016|
