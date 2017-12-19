@@ -1,6 +1,7 @@
 #### Supplementary Table 1. 
 Single nucleotide polymorphisms (SNPs)(`a`) in the genetic risk score.
 
+
 |Region| SNP| Nearest Genes(s) | Reference(s) |
 |------|----|------------------|--------------|
 |2p22.3 |rs192481803|AC012593.1|Chahal et al 2016|
@@ -19,6 +20,7 @@ Single nucleotide polymorphisms (SNPs)(`a`) in the genetic risk score.
 |16q24.3|rs4268748|DEF8|Asgari et al 2016|
 |16q24.3|rs1805007|MC1R|Chahal et al 2016|
 |20q11.22|rs6059655|RALY|Asgari et al 2016; Chahal et al 2016|
+
 
  - a) from genome-wide association studies of cSCC risk
  - b) two flanking genes of an inter-genic SNP

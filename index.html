@@ -81,7 +81,11 @@
                                                         <span class="input-group-addon"><input id="genotyped" name="genotyped" type="checkbox"></span>
                                                         <p class="form-control">Known Variants</p>
                                                     </div>
-                                                    <p class="help-block">I have been typed for the 16 genetic variants associated with increased risk of squamous cell skin cancer</p>
+                                                    <p class="help-block">I have been typed for the 
+                                                    <a id="show-alleles-button" 
+                                                       data-toggle="modal" 
+                                                       style="cursor:pointer"
+                                                       data-target="#alleles-modal">16 genetic variants</a> associated with increased risk of squamous cell skin cancer</p>
                                                 </div>
                                             </div><!-- Risk Alleles: Select Basic -->
                                             <div class="form-group" id="risk_alleles_div" style="display:none">
@@ -200,6 +204,21 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal for SNP Table -->
+    <div class="modal" id='alleles-modal'>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"  style="width:800px;height:800px">
+                <div class="modal-body" id="alleles-body">
+                    <iframe src="https://researchapps.github.io/cSCC/docs/table" 
+                            width="800" height="760" 
+                            frameborder="0" marginheight="0" 
+                            marginwidth="0">Loading...</iframe>
+                </div>
+        </div>
+      </div>
+    </div>
+   
     <script src="js/jquery-2.2.2.js" type="text/javascript"></script> 
     <script src='js/tether.min.js'></script> 
     <script src='js/lodash.min.js'></script> 
@@ -306,7 +325,13 @@
       })
 
 
-    })          
+    })
+
+    function showAlleles() {
+        $("#alleles-body").append('<iframe src="https://researchapps.github.io/cSCC/docs/table" width="760" height="760" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>')
+        $('#alleles-modal').modal('show');
+    }
+       
     </script>
 </body>
 </html>
