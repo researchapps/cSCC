@@ -40,35 +40,43 @@
                                             <div class="form-group" id="past_rx_invasive_div">
                                                 <label class="col-md-3 control-label" for="past_rx_invasive">Patient History</label>
                                                 <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><input checked id="past_rx_invasive" name="past_rx_invasive" type="checkbox"></span>
-                                                        <p class="form-control">Past Diagnosis</p>
-                                                    </div>
                                                     <p class="help-block">I have been diagnosed in the past with an invasive squamous cell skin cancer</p>
+                                                    <div class="radio">
+                                                        <label for="past_rx_invasive-0"><input class="past_rx_invasive" id="past_rx_invasive-0" name="past_rx_invasive" type="radio" value="1" required> True</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label for="past_rx_invasive-1"><input class="past_rx_invasive" id="past_rx_invasive-1" name="past_rx_invasive" type="radio" value="0" required> False</label>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <hr class="past_rx_invasive_div" style="display:none">
 
                                             <!-- Past Rx Insitu: Appended checkbox -->
                                             <div class="form-group" id="past_rx_insitu_div" style='display:none'>
-                                                <label class="col-md-3 control-label" for="past_rx_insitu">Related Diagnosis</label>
+                                                <label class="col-md-3 control-label" for="past_rx_insitu"></label>
                                                 <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><input id="past_rx_insitu" name="past_rx_insitu" placeholder="in-situ squamous cell carcinoma" type="checkbox"></span>
-                                                        <p class="form-control">in-situ squamous cell carcinoma</p>
-                                                    </div>
                                                     <p class="help-block">I have been diagnosed in the past with a non-invasive (also called in-situ) squamous cell skin cancer</p>
+                                                    <div class="radio">
+                                                        <label for="past_rx_insitu-0"><input id="past_rx_insitu-0" name="past_rx_insitu" type="radio" value="1" required> True</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label for="past_rx_insitu-1"><input id="past_rx_insitu-1" name="past_rx_insitu" type="radio" value="0" required> False</label>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <hr>
 
                                             <!-- Past Rx Keratosis: Appended checkbox -->
-                                            <div class="form-group" id="past_rx_keratosis_div" style='display:none'>
+                                            <div class="form-group" id="past_rx_keratosis_div">
                                                 <label class="col-md-3 control-label" for="past_rx_keratosis"></label>
                                                 <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><input id="past_rx_keratosis" name="past_rx_keratosis" type="checkbox"></span>
-                                                        <p class="form-control">actinic keratosis</p>
-                                                    </div>
                                                     <p class="help-block">I have been diagnosed in the past with an actinic keratosis</p>
+                                                    <div class="radio">
+                                                        <label for="past_rx_keratosis-0"><input id="past_rx_keratosis-0" name="past_rx_keratosis" type="radio" value="1" required> True</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label for="past_rx_keratosis-1"><input id="past_rx_keratosis-1" name="past_rx_keratosis" type="radio" value="0" required> False</label>
+                                                    </div> 
                                                 </div>
                                             </div>
                                             <hr>
@@ -87,7 +95,9 @@
                                                        style="cursor:pointer"
                                                        data-target="#alleles-modal">16 genetic variants</a> associated with increased risk of squamous cell skin cancer</p>
                                                 </div>
-                                            </div><!-- Risk Alleles: Select Basic -->
+                                            </div>
+
+                                            <!-- Risk Alleles: Select Basic -->
                                             <div class="form-group" id="risk_alleles_div" style="display:none">
                                                 <label class="col-md-3 control-label" for="risk_alleles">The number of risk alleles that I carry is</label>
                                                 <div class="col-md-3">
@@ -140,10 +150,10 @@
                                                 <label class="col-md-3 control-label" for="gender">My gender is</label>
                                                 <div class="col-md-3">
                                                     <div class="radio">
-                                                        <label for="gender-0"><input checked="checked" id="gender-0" name="gender" type="radio" value="male"> Male</label>
+                                                        <label for="gender-0"><input id="gender-0" name="gender" type="radio" value="male" required> Male</label>
                                                     </div>
                                                     <div class="radio">
-                                                        <label for="gender-1"><input id="gender-1" name="gender" type="radio" value="female"> Female</label>
+                                                        <label for="gender-1"><input id="gender-1" name="gender" type="radio" value="female" required> Female</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -227,14 +237,14 @@
     $(document).ready(function(){
       
       // If past rx invasive selected, other questions not relevant
-      $("#past_rx_invasive").change(function(){
-     
-          if ($(this).is(":checked")) {
-              $("#past_rx_keratosis_div").hide();
+      $(".past_rx_invasive").change(function(){
+          
+          if ($(this).val()=="1") {
               $("#past_rx_insitu_div").hide();
+              $(".past_rx_insitu_div").hide();
           } else {
-              $("#past_rx_keratosis_div").show();
               $("#past_rx_insitu_div").show(); 
+              $(".past_rx_insitu_div").show();
           }
 
       })
@@ -259,9 +269,9 @@
           var gender = $('input[name=gender]:checked').val();
           var age_years = parseInt($('input[name=age_years]').val());
           var sunburn_tendency = parseInt($('#tendency_sunburn').val());
-          var past_rx_invasive = + $('input[name=past_rx_invasive]').is(':checked');
-          var past_rx_insitu = + $('input[name=past_rx_insitu]').is(':checked');
-          var past_rx_keratosis = + $('input[name=past_rx_keratosis]').is(':checked');
+          var past_rx_invasive = + $('input[name=past_rx_invasive]:checked').val();
+          var past_rx_insitu = + $('input[name=past_rx_insitu]:checked').val();
+          var past_rx_keratosis = + $('input[name=past_rx_keratosis]:checked').val();
           var genomic_risk = parseInt($('#genomic_risk').find(":selected").val());
 
           // Step 1: define variables based on gender.
