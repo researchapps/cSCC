@@ -57,10 +57,10 @@
                                                 <div class="col-md-8">
                                                     <p class="help-block">I have been diagnosed in the past with a non-invasive (also called in-situ) squamous cell skin cancer</p>
                                                     <div class="radio">
-                                                        <label for="past_rx_insitu-0"><input id="past_rx_insitu-0" name="past_rx_insitu" type="radio" value="1" required> True</label>
+                                                        <label for="past_rx_insitu-0"><input id="past_rx_insitu-0" name="past_rx_insitu" type="radio" value="1"> True</label>
                                                     </div>
                                                     <div class="radio">
-                                                        <label for="past_rx_insitu-1"><input id="past_rx_insitu-1" name="past_rx_insitu" type="radio" value="0" required> False</label>
+                                                        <label for="past_rx_insitu-1"><input id="past_rx_insitu-1" name="past_rx_insitu" type="radio" value="0"> False</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,15 +85,27 @@
                                             <div class="form-group" id='genotyped_div'>
                                                 <label class="col-md-3 control-label" for="genotyped">Genetic Risk</label>
                                                 <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><input id="genotyped" name="genotyped" type="checkbox"></span>
-                                                        <p class="form-control">Known Variants</p>
-                                                    </div>
                                                     <p class="help-block">I have been typed for the 
                                                     <a id="show-alleles-button" 
                                                        data-toggle="modal" 
                                                        style="cursor:pointer"
                                                        data-target="#alleles-modal">16 genetic variants</a> associated with increased risk of squamous cell skin cancer</p>
+                                                    <div class="radio">
+                                                        <label for="genotyped-0">
+                                                            <input id="genotyped-0" 
+                                                                   name="genotyped" 
+                                                                   type="radio" 
+                                                                   class="genotyped"
+                                                                   value="1" required> True</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label for="genotyped-1">
+                                                            <input id="genotyped-1" 
+                                                                   name="genotyped" 
+                                                                   type="radio" 
+                                                                   class="genotyped" 
+                                                                   value="0" required> False</label>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -203,7 +215,7 @@
                         <div class="container" style="margin:0px 50px 50px 50px">
                             <legend>What is this for?</legend>
                             <p class="well">This is a diagnosis tool intended to be used with a doctor.</p><legend>Who is involved?</legend>
-                            <p class="well">The algorithm is developed by <a href="http://med.stanford.edu/hrp.html" target="_blank">Health Research and Policy</a> at the Stanford University School of Medicine. The web interface and associated code is maintained <a href="https://www.github.com/researchapps/cSCC">on Github</a> and you should <a href="https://www.github.com/researchapps/cSCC/issues">open an issue</a> if you have any questions.</p>
+                            <p class="well">The algorithm is developed by <a href="http://med.stanford.edu/hrp.html" target="_blank">Health Research and Policy</a> at the Stanford University School of Medicine. The web interface and associated code is maintained <a href="https://www.github.com/researchapps/cSCCscore">on Github</a> and you should <a href="https://www.github.com/researchapps/cSCCscore/issues">open an issue</a> if you have any questions.</p>
                             <div style="padding-top:50px; float:left">
                                 <a href="https://srcc.stanford.edu" style="padding-right:30px" target="_blank"><img src="img/srcc.png" style="border-radius:5px; width:200px"></a> <a href="http://med.stanford.edu/hrp.html" target="_blank"><img src="img/stanford_medicine.png" style="border-radius:5px; width:250px"></a>
                             </div>
@@ -220,7 +232,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content"  style="width:800px;height:800px">
                 <div class="modal-body" id="alleles-body">
-                    <iframe src="https://researchapps.github.io/cSCC/docs/table" 
+                    <iframe src="https://researchapps.github.io/cSCCscore/docs/table" 
                             width="800" height="760" 
                             frameborder="0" marginheight="0" 
                             marginwidth="0">Loading...</iframe>
@@ -236,23 +248,26 @@
     <script type='text/javascript'>
     $(document).ready(function(){
       
-      // If past rx invasive selected, other questions not relevant
+      // If past rx invasive selected, non-invasive (in-situ) is changed to false, not required
       $(".past_rx_invasive").change(function(){
           
           if ($(this).val()=="1") {
               $("#past_rx_insitu_div").hide();
               $(".past_rx_insitu_div").hide();
+              $('input[name=past_rx_insitu]:checked').val("0")
+              $('input[name=past_rx_insitu]').prop('required', false)
           } else {
               $("#past_rx_insitu_div").show(); 
               $(".past_rx_insitu_div").show();
+              $('input[name=past_rx_insitu]').prop('required', true)
           }
 
       })
 
       // If the patient hasn't been genotyped, ask for family history            
-      $("#genotyped").change(function(){
+      $(".genotyped").change(function(){
       
-          if ($(this).is(":checked")) {
+          if ($('input[name=genotyped]:checked').val()==1) {
               $("#risk_alleles_div").show();
               $("#genomic_risk_div").hide();
           } else {
@@ -272,7 +287,16 @@
           var past_rx_invasive = + $('input[name=past_rx_invasive]:checked').val();
           var past_rx_insitu = + $('input[name=past_rx_insitu]:checked').val();
           var past_rx_keratosis = + $('input[name=past_rx_keratosis]:checked').val();
-          var genomic_risk = parseInt($('#genomic_risk').find(":selected").val());
+
+          // If genotyped, then use risk alleles
+          if ($('input[name=genotyped]:checked').val()==1) {
+              var genomic_risk = parseInt($('#genomic_risk').find(":selected").val());
+
+          // Otherwise use family history genomic risk estimate
+          } else {
+              var genomic_risk = parseInt($('#risk_alleles').find(":selected").val());
+          }
+
 
           // Step 1: define variables based on gender.
           if (gender == "female"){
@@ -302,11 +326,11 @@
           var z1 = age_years/10.0;
           var z2 = + (sunburn_tendency==1); // moderate, + converts bool to int
           var z3 = + (sunburn_tendency==2); // high,
-          var z4 = past_rx_invasive;        // 1 indicates past diagnosis of invasive carcinoma
-          var z5 = past_rx_insitu           // 1 indicates past diagnosis of non invasive (in-situ)
+          var z4 = + (genomic_risk==1)      // moderate genetic risk 
+          var z5 = + (genomic_risk==2)     // high genetic risk (either by way of alleles or report)
           var z6 = past_rx_keratosis        // 1 indicates past diagnosis of actinic keratosis
-          var z7 = + (genomic_risk==1)      // moderate genetic risk 
-          var z8 = + (genomic_risk==2)     // high genetic risk (either by way of alleles or report)
+          var z7 = past_rx_insitu           // 1 indicates past diagnosis of non invasive (in-situ)
+          var z8 = past_rx_invasive;        // 1 indicates past diagnosis of invasive carcinoma
 
           var Z = [z1, z2, z3, z4, z5, z6, z7, z8]
           console.log('Z is ' + Z);
@@ -338,7 +362,7 @@
     })
 
     function showAlleles() {
-        $("#alleles-body").append('<iframe src="https://researchapps.github.io/cSCC/docs/table" width="760" height="760" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>')
+        $("#alleles-body").append('<iframe src="https://researchapps.github.io/cSCCscore/docs/table" width="760" height="760" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>')
         $('#alleles-modal').modal('show');
     }
        
