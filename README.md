@@ -1,4 +1,4 @@
-# cSCC
+# cSCCscore
 
 This is the Stanford Squamous Cell Skin Cancer (cSCC) Recurrence Web Prediction Tool.
 
