@@ -178,7 +178,7 @@
                                                     <select class="form-control" 
                                                             id="tendency_sunburn"
                                                             name="tendency_sunburn">
-                                                        <option value="0">
+                                                        <option value="0" selected="selected">
                                                             Low
                                                         </option>
                                                         <option value="1">
@@ -255,7 +255,7 @@
           if ($(this).val()=="1") {
               $("#past_rx_insitu_div").hide();
               $(".past_rx_insitu_div").hide();
-              $('input[name=past_rx_insitu]:checked').val("0")
+              $('input[name=past_rx_insitu]').prop('checked', false)
               $('input[name=past_rx_insitu]').prop('required', false)
           } else {
               $("#past_rx_insitu_div").show(); 
@@ -268,7 +268,7 @@
       // If the patient hasn't been genotyped, ask for family history            
       $(".genotyped").change(function(){
       
-          if ($('input[name=genotyped]:checked').val()==1) {
+          if (+$('input[name=genotyped]').prop('checked')==1) {
               $("#risk_alleles_div").show();
               $("#genomic_risk_div").hide();
           } else {
@@ -285,8 +285,12 @@
           var gender = $('input[name=gender]:checked').val();
           var age_years = parseInt($('input[name=age_years]').val());
           var sunburn_tendency = parseInt($('#tendency_sunburn').val());
-          var past_rx_invasive = + $('input[name=past_rx_invasive]:checked').val();
-          var past_rx_insitu = + $('input[name=past_rx_insitu]:checked').val();
+          var past_rx_invasive = + $('input[name=past_rx_invasive]').prop('checked');
+
+          var past_rx_insitu = 0;
+          if (past_rx_invasive == 1){
+              var past_rx_insitu = + $('input[name=past_rx_insitu]').prop('checked');
+          }
           var past_rx_keratosis = + $('input[name=past_rx_keratosis]:checked').val();
 
           // If genotyped, then use risk alleles
