@@ -252,7 +252,7 @@
       // If past rx invasive selected, non-invasive (in-situ) is changed to false, not required
       $(".past_rx_invasive").change(function(){
           
-          if ($(this).val()=="1") {
+          if ($(this).val()==1) {
               $("#past_rx_insitu_div").hide();
               $(".past_rx_insitu_div").hide();
               $('input[name=past_rx_insitu]').prop('checked', false)
@@ -268,7 +268,7 @@
       // If the patient hasn't been genotyped, ask for family history            
       $(".genotyped").change(function(){
       
-          if (+$('input[name=genotyped]').prop('checked')==1) {
+          if ($('input[name=genotyped]').prop('checked')) {
               $("#risk_alleles_div").show();
               $("#genomic_risk_div").hide();
           } else {
@@ -288,20 +288,19 @@
           var past_rx_invasive = + $('input[name=past_rx_invasive]').prop('checked');
 
           var past_rx_insitu = 0;
-          if (past_rx_invasive == 1){
+          if (past_rx_invasive == 0){
               var past_rx_insitu = + $('input[name=past_rx_insitu]').prop('checked');
           }
-          var past_rx_keratosis = + $('input[name=past_rx_keratosis]:checked').val();
+          var past_rx_keratosis = + $('input[name=past_rx_keratosis]').prop('checked');
 
           // If genotyped, then use risk alleles
-          if ($('input[name=genotyped]:checked').val()==1) {
-              var genomic_risk = parseInt($('#genomic_risk').find(":selected").val());
-
-          // Otherwise use family history genomic risk estimate
-          } else {
+          if ($('input[name=genotyped]').prop('checked')) {
               var genomic_risk = parseInt($('#risk_alleles').find(":selected").val());
-          }
 
+          // Otherwise use family history
+          } else {
+              var genomic_risk = parseInt($('#genomic_risk').find(":selected").val());
+          }
 
           // Step 1: define variables based on gender.
           if (gender == "female"){
@@ -331,11 +330,23 @@
           var z1 = age_years/10.0;
           var z2 = + (sunburn_tendency==1); // moderate, + converts bool to int
           var z3 = + (sunburn_tendency==2); // high,
-          var z4 = + (genomic_risk==1)      // moderate genetic risk 
-          var z5 = + (genomic_risk==2)     // high genetic risk (either by way of alleles or report)
+          var z4 = + (genomic_risk=="1")      // moderate genetic risk 
+          var z5 = + (genomic_risk=="2")      // high genetic risk (either by way of alleles or report)
           var z6 = past_rx_keratosis        // 1 indicates past diagnosis of actinic keratosis
           var z7 = past_rx_insitu           // 1 indicates past diagnosis of non invasive (in-situ)
           var z8 = past_rx_invasive;        // 1 indicates past diagnosis of invasive carcinoma
+
+
+          // Variable sanity check
+          console.log('gender: ' + gender);
+          console.log('age: ' + age_years);
+          console.log('moderate sunburn tendency: ' + z2);
+          console.log('high sunburn tendency: ' + z3);
+          console.log('moderate genetic risk: ' + z4);
+          console.log('high genetic risk: ' + z5);
+          console.log('past_rx_invasive: ' + past_rx_invasive);
+          console.log('past_rx_insitu: ' + past_rx_insitu);
+          console.log('past_rx_keratosis: ' + past_rx_keratosis);
 
           var Z = [z1, z2, z3, z4, z5, z6, z7, z8]
           console.log('Z is ' + Z);

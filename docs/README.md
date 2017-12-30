@@ -2,6 +2,7 @@
 The following files are provided for documentation. If you need more information or have a question, please [open an issue](https://www.github.com/researchapps/cSCCscore/issues).
 
  - [cSCCscore122917.pdf](cSCCscore122917.pdf): a description provided by the researchers that developed the tool, also available as [cSCCscore122917.docx](cSCCscore122917.docx).
+ - [cSCC.R](cSCC.R): the R script implementation of the algorithm used to implement the tool (javascript).
  - [JavaScript Implementation](https://github.com/researchapps/cSCC/blob/master/index.html#L233) is provided in the `index.html` file served with the repository.
  - [Figure 2](figure-2-12-12-2017.pdf) is provided in a PDF. From the creators of the algorithm:
 
